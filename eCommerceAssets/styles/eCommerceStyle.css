@@ -383,11 +383,11 @@ header #headerLinks a {
 	left: -2%;
 }
 #mainWrapper footer div {
-	width: 100%;
-	margin-left: -16px;
-	text-align: justify;
-	padding-bottom: 16px;
-	overflow: auto;
+    width: 100%;
+    margin-left: -16px;
+    text-align: center;
+    padding-bottom: 16px;
+    overflow: auto;
 }
 /* Unordered list for menu elements */
 .menu ul {
@@ -405,4 +405,20 @@ header #headerLinks a {
 	width: 100%;
 	padding-left: 0px;
 }
+}
+
+.copyright {
+	clear: both;
+	overflow: auto;
+	background-color: rgba(0,0,0,1.00);
+	color: white;
+	font-family: source-sans-pro, sans-serif;
+	font-style: normal;
+	font-weight: 200;
+	line-height: 1.8;
+	padding-top: 22px;
+	padding-left: 22px;
+	text-align: center;
+	padding-bottom: 22px;
+	padding-right: 22px;
 }
