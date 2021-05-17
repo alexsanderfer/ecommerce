@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'c87a2e4d93e6904bf8fa7a1aa1171790a1b20bd0',
+    'reference' => '4a825295ef29852daf231ec99fa85774de7c2200',
     'name' => 'alexsanderfer/ecommerce',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'c87a2e4d93e6904bf8fa7a1aa1171790a1b20bd0',
+      'reference' => '4a825295ef29852daf231ec99fa85774de7c2200',
     ),
     'fig/http-message-util' => 
     array (

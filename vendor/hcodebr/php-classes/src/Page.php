@@ -8,22 +8,27 @@ class Page
 {
     private $tpl;
     private $options = [];
-    private $defaulys = [
-        "data" => []
+    private $defaults = [
+        "header" => true,
+        "footer" => true,
+        "data" => [
+            "dir_url" => "http://www.hcodecommerce.com"
+        ]
     ];
 
-    public function __construct($opts = array())
+    public function __construct($opts = array(), $tpl_dir = "views/")
     {
-        $this->options = array_merge($this->defaulys, $opts);
+        $this->options = array_merge($this->defaults, $opts);
         $config = array(
-            "tpl_dir" => $_SERVER['DOCUMENT_ROOT'] . "/views/",
+            "tpl_dir" => $tpl_dir,
             "cache_dir" => $_SERVER['DOCUMENT_ROOT'] . "/views-cache/",
-            "debug" => false // set to false to improve the speed
+            "debug" => true // set to false to improve the speed
         );
         Tpl::configure($config);
         $this->tpl = new Tpl;
         $this->setData($this->options["data"]);
-        $this->tpl->draw("header");
+
+        if ($this->options["header"] === true) $this->tpl->draw("header");
     }
 
     private function setData($data = array())
@@ -41,6 +46,6 @@ class Page
 
     public function __destruct()
     {
-        $this->tpl->draw("footer");
+        if ($this->options["footer"] === true) $this->tpl->draw("footer");
     }
 }
