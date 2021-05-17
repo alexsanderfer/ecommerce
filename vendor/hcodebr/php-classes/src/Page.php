@@ -21,12 +21,14 @@ class Page
         $this->options = array_merge($this->defaults, $opts);
         $config = array(
             "tpl_dir" => $tpl_dir,
-            "cache_dir" => $_SERVER['DOCUMENT_ROOT'] . "/views-cache/",
+            "cache_dir" => "/views-cache/",
             "debug" => true // set to false to improve the speed
         );
         Tpl::configure($config);
         $this->tpl = new Tpl;
         $this->setData($this->options["data"]);
+
+        if (isset($this->options['page'])) $this->tpl->assign("page", $this->options['page']);
 
         if ($this->options["header"] === true) $this->tpl->draw("header");
     }
