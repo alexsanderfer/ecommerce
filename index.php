@@ -1,16 +1,15 @@
 <?php
 
-use Hcode\DB\Sql;
+use Hcode\Page;
+use Slim\Slim;
 
 require_once("vendor/autoload.php");
 
-$app = new \Slim\Slim();
+$app = new Slim();
 $app->config('debug', true);
-$app->get('/', function () {
-    $sql = new Sql();
-    $results = $sql->select("SELECT * FROM tb_users");
-    echo "Tudo funcionando: Ok";
-    var_dump($results);
+$app->get('/', function () use ($app) {
+    $page = new Page();
+    $page->setTpl('index');
 });
 
 $app->run();
