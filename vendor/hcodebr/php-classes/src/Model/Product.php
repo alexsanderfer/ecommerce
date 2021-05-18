@@ -4,7 +4,6 @@ namespace Hcode\Model;
 
 use \Hcode\DB\Sql;
 use \Hcode\Model;
-use \Hcode\Mailer;
 
 class Product extends Model
 {
@@ -23,7 +22,6 @@ class Product extends Model
             $row = $p->getValues();
         }
         return $list;
-
     }
 
     public function save()
