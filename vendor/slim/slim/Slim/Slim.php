@@ -1293,7 +1293,7 @@ class Slim
      */
     protected function defaultNotFound()
     {
-        echo self::generateTemplateMarkup('404 Page Not Found', '<p>The page you are looking for could not be found. Check the address bar to ensure your URL is spelled correctly. If all else fails, you can visit our home page at the link below.</p><a href="' . $this->request->getRootUri() . '/">Visit the Home Page</a>');
+        echo self::generateTemplateMarkup('Erro 404 Página Não Encontrada', '<p>A página que você está procurando não foi encontrada. Cheque a barra de endereço pra ter certeza que o URL foi digitando corretamente. Se tudo isso falhar, você pode visitar a home page no link abaixo.</p><a href="' . $this->request->getRootUri() . '/">Visite a Home Page</a>');
     }
 
     /**
