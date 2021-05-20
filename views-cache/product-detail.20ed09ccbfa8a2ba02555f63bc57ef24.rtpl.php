@@ -1,113 +1,171 @@
-<?php if(!class_exists('Rain\Tpl')){exit;}?><div class="product-big-title-area">
+<?php if (!class_exists('Rain\Tpl')) {
+    exit;
+}?><!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <title>Loja Virtual | Loja Virtual</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Loja Virtual">
+    <meta name="keywords" content="Loja Virtual, eCommerce, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="shortcut icon"/>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,300i,400,400i,700,700i" rel="stylesheet">
+
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../custom/site/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../custom/site/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="../custom/site/css/flaticon.css"/>
+    <link rel="stylesheet" href="../custom/site/css/slicknav.min.css"/>
+    <link rel="stylesheet" href="../custom/site/css/jquery-ui.min.css"/>
+    <link rel="stylesheet" href="../custom/site/css/owl.carousel.min.css"/>
+    <link rel="stylesheet" href="../custom/site/css/animate.css"/>
+    <link rel="stylesheet" href="../custom/site/css/style.css"/>
+    <link rel="stylesheet" href="../custom/site/css/custom.css"/>
+
+</head>
+<body>
+
+
+<!-- product section -->
+<section class="product-section">
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                <div class="product-bit-title text-center">
-                    <h2><?php echo htmlspecialchars( $product["desproduct"], ENT_COMPAT, 'UTF-8', FALSE ); ?></h2>
+            <div class="col-lg-6">
+                <div class="product-pic-zoom">
+                    <img class="product-big-img"
+                         src="<?php echo htmlspecialchars($product["desphoto"], ENT_COMPAT, 'UTF-8', FALSE); ?>" alt="">
+                </div>
+                <div class="product-thumbs" tabindex="1" style="overflow: hidden; outline: none;">
+                    <div class="product-thumbs-track">
+                        <div class="pt active"
+                             data-imgbigurl="<?php echo htmlspecialchars($product["desphoto"], ENT_COMPAT, 'UTF-8', FALSE); ?>">
+                            <img src="<?php echo htmlspecialchars($product["desphoto"], ENT_COMPAT, 'UTF-8', FALSE); ?>"
+                                 alt=""></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 product-details">
+                <h2 class="p-title"><?php echo htmlspecialchars($product["desproduct"], ENT_COMPAT, 'UTF-8', FALSE); ?></h2>
+                <h3 class="p-price">R$<?php echo formatPrice($product["vlprice"]); ?></h3>
+                <h4 class="p-stock">Status: <span>Disponível</span></h4>
+                <!--<div class="p-rating">
+                    <i class="fa fa-star-o"></i>
+                    <i class="fa fa-star-o"></i>
+                    <i class="fa fa-star-o"></i>
+                    <i class="fa fa-star-o"></i>
+                    <i class="fa fa-star-o fa-fade"></i>
+                </div>-->
+                <div class="p-review">
+                    <p class="categoria-detail">Categoria<?php $counter1 = -1;
+                        if (isset($categories) && (is_array($categories) || $categories instanceof Traversable) && sizeof($categories)) foreach ($categories as $key1 => $value1) {
+                            $counter1++; ?> | <a id="categoria-detail"
+                                                 href="/categories/<?php echo htmlspecialchars($value1["idcategory"], ENT_COMPAT, 'UTF-8', FALSE); ?>"><?php echo htmlspecialchars($value1["descategory"], ENT_COMPAT, 'UTF-8', FALSE); ?></a><?php } ?>
+
+                </div>
+                <!--<div class="fw-size-choose">
+                    <p>Tamanho</p>
+                    <div class="sc-item">
+                        <input type="radio" name="sc" id="xs-size">
+                        <label for="xs-size">32</label>
+                    </div>
+                    <div class="sc-item">
+                        <input type="radio" name="sc" id="s-size">
+                        <label for="s-size">34</label>
+                    </div>
+                    <div class="sc-item">
+                        <input type="radio" name="sc" id="m-size" checked="">
+                        <label for="m-size">36</label>
+                    </div>
+                    <div class="sc-item">
+                        <input type="radio" name="sc" id="l-size">
+                        <label for="l-size">38</label>
+                    </div>
+                    <div class="sc-item disable">
+                        <input type="radio" name="sc" id="xl-size" disabled>
+                        <label for="xl-size">40</label>
+                    </div>
+                    <div class="sc-item">
+                        <input type="radio" name="sc" id="xxl-size">
+                        <label for="xxl-size">42</label>
+                    </div>
+                </div>-->
+                <div class="quantity">
+                    <p>Quantidade</p>
+                    <div class="pro-qty"><input type="text" value="1" name="qtd"></div>
+                </div>
+                <a href="/cart/<?php echo htmlspecialchars($product["idproduct"], ENT_COMPAT, 'UTF-8', FALSE); ?>/add"
+                   class="site-btn">COMPRAR</a>
+                <div id="accordion" class="accordion-area">
+                    <div class="panel">
+                        <div class="panel-header" id="headingOne">
+                            <button class="panel-link active" data-toggle="collapse" data-target="#collapse1"
+                                    aria-expanded="true" aria-controls="collapse1">informação
+                            </button>
+                        </div>
+                        <div id="collapse1" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div class="panel-body">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra tempor so
+                                    dales. Phasellus sagittis auctor gravida. Integer bibendum sodales arcu id te mpus.
+                                    Ut consectetur lacus leo, non scelerisque nulla euismod nec.</p>
+                                <p>Approx length 66cm/26" (Based on a UK size 8 sample)</p>
+                                <p>Mixed fibres</p>
+                                <p>The Model wears a UK size 8/ EU size 36/ US size 4 and her height is 5'8"</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel">
+                        <div class="panel-header" id="headingTwo">
+                            <button class="panel-link" data-toggle="collapse" data-target="#collapse2"
+                                    aria-expanded="false" aria-controls="collapse2">Detalhes
+                            </button>
+                        </div>
+                        <div id="collapse2" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                            <div class="panel-body">
+                                <img src="<?php echo htmlspecialchars($product["desphoto"], ENT_COMPAT, 'UTF-8', FALSE); ?>"
+                                     alt="">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra tempor so
+                                    dales. Phasellus sagittis auctor gravida. Integer bibendum sodales arcu id te mpus.
+                                    Ut consectetur lacus leo, non scelerisque nulla euismod nec.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel">
+                        <div class="panel-header" id="headingThree">
+                            <button class="panel-link" data-toggle="collapse" data-target="#collapse3"
+                                    aria-expanded="false" aria-controls="collapse3">shipping & Returns
+                            </button>
+                        </div>
+                        <div id="collapse3" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                            <div class="panel-body">
+                                <h4>7 Days Returns</h4>
+                                <p>Cash on Delivery Available<br>Home Delivery <span>3 - 4 days</span></p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra tempor so
+                                    dales. Phasellus sagittis auctor gravida. Integer bibendum sodales arcu id te mpus.
+                                    Ut consectetur lacus leo, non scelerisque nulla euismod nec.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div class="single-product-area">
-    <div class="zigzag-bottom"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="product-content-right">
-                    <div class="product-breadcroumb">
-                        <a href="/">Home</a>
-                        <a href=""><?php echo htmlspecialchars( $product["desproduct"], ENT_COMPAT, 'UTF-8', FALSE ); ?></a>
-                    </div>
+</section>
+<!-- product section end -->
 
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="product-images">
-                                <div class="product-main-img">
-                                    <img src="<?php echo htmlspecialchars( $product["desphoto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="col-sm-6">
-                            <div class="product-inner">
-                                <h2 class="product-name"><?php echo htmlspecialchars( $product["desproduct"], ENT_COMPAT, 'UTF-8', FALSE ); ?></h2>
-                                <div class="product-inner-price">
-                                    <ins>R$<?php echo formatPrice($product["vlprice"]); ?></ins>
-                                </div>
+<!--====== Javascripts & Jquery ======-->
+<script src="../custom/site/js/jquery-3.2.1.min.js"></script>
+<script src="../custom/site/js/bootstrap.min.js"></script>
+<script src="../custom/site/js/jquery.slicknav.min.js"></script>
+<script src="../custom/site/js/owl.carousel.min.js"></script>
+<script src="../custom/site/js/jquery.nicescroll.min.js"></script>
+<script src="../custom/site/js/jquery.zoom.min.js"></script>
+<script src="../custom/site/js/jquery-ui.min.js"></script>
+<script src="../custom/site/js/main.js"></script>
 
-                                <form action="" class="cart">
-                                    <div class="quantity">
-                                        <input type="number" size="4" class="input-text qty text" title="Qty" value="1"
-                                               name="quantity" min="1" step="1">
-                                    </div>
-                                    <button class="add_to_cart_button" type="submit">Comprar</button>
-                                </form>
-
-                                <div class="product-inner-category">
-                                    <p>Categorias<?php $counter1=-1;  if( isset($categories) && ( is_array($categories) || $categories instanceof Traversable ) && sizeof($categories) ) foreach( $categories as $key1 => $value1 ){ $counter1++; ?> <a
-                                            href="/categories/<?php echo htmlspecialchars( $value1["idcategory"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["descategory"], ENT_COMPAT, 'UTF-8', FALSE ); ?></a> - <?php } ?>
-
-                                </div>
-
-                                <div role="tabpanel">
-                                    <ul class="product-tab" role="tablist">
-                                        <li role="presentation" class="active"><a href="#home" aria-controls="home"
-                                                                                  role="tab"
-                                                                                  data-toggle="tab">Descrição</a></li>
-                                        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab"
-                                                                   data-toggle="tab">Avaliações</a></li>
-                                    </ul>
-                                    <div class="tab-content">
-                                        <div role="tabpanel" class="tab-pane fade in active" id="home">
-                                            <h2>Descrição do Produto</h2>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tristique,
-                                                diam in consequat iaculis, est purus iaculis mauris, imperdiet facilisis
-                                                ante ligula at nulla. Quisque volutpat nulla risus, id maximus ex
-                                                aliquet ut. Suspendisse potenti. Nulla varius lectus id turpis dignissim
-                                                porta. Quisque magna arcu, blandit quis felis vehicula, feugiat gravida
-                                                diam. Nullam nec turpis ligula. Aliquam quis blandit elit, ac sodales
-                                                nisl. Aliquam eget dolor eget elit malesuada aliquet. In varius lorem
-                                                lorem, semper bibendum lectus lobortis ac.</p>
-
-                                            <p>Mauris placerat vitae lorem gravida viverra. Mauris in fringilla ex.
-                                                Nulla facilisi. Etiam scelerisque tincidunt quam facilisis lobortis. In
-                                                malesuada pulvinar neque a consectetur. Nunc aliquam gravida purus, non
-                                                malesuada sem accumsan in. Morbi vel sodales libero.</p>
-                                        </div>
-                                        <div role="tabpanel" class="tab-pane fade" id="profile">
-                                            <h2>Reviews</h2>
-                                            <div class="submit-review">
-                                                <p><label for="name">Name</label> <input name="name" type="text"></p>
-                                                <p><label for="email">Email</label> <input name="email" type="email">
-                                                </p>
-                                                <div class="rating-chooser">
-                                                    <p>Your rating</p>
-
-                                                    <div class="rating-wrap-post">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                    </div>
-                                                </div>
-                                                <p><label for="review">Your review</label> <textarea name="review" id=""
-                                                                                                     cols="30"
-                                                                                                     rows="10"></textarea>
-                                                </p>
-                                                <p><input type="submit" value="Submit"></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+</body>
+</html>

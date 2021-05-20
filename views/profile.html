@@ -1,0 +1,44 @@
+<!-- checkout section  -->
+<section class="checkout-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 order-2 order-lg-1">
+                <form action="/profile" class="checkout-form" method="post">
+                    <div class="cf-title">Minha Conta</div>
+                    <div class="row address-inputs">
+
+                        <div class="col-md-12">
+                            <input id="desperson" name="desperson" placeholder="Nome Completo" type="text"
+                                   value="{$user.desperson}">
+
+                            <input id="desemail" name="desemail" placeholder="Email" type="text"
+                                   value="{$user.desemail}">
+
+                            <input id="nrphone" name="nrphone" placeholder="Telefone" type="text"
+                                   value="{$user.nrphone}">
+                        </div>
+                    </div>
+                    <button class="site-btn submit-order-btn">SALVAR</button>
+                </form>
+            </div>
+            <div class="col-lg-4 order-1 order-lg-2">
+                {if="$profileMsg != ''"}
+                <div class="alert alert-success">
+                    {$profileMsg}
+                </div>
+                {/if}
+                {if="$profileError != ''"}
+                <div class="alert alert-danger">
+                    {$profileError}
+                </div>
+                {/if}
+
+                {include="profile-menu"}
+
+            </div>
+
+
+        </div>
+    </div>
+</section>
+<!-- checkout section end -->

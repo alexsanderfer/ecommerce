@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <title>Loja Virtual | Loja Virtual</title>
+    <meta charset="UTF-8">
+    <meta content="Loja Virtual" name="description">
+    <meta content="Loja Virtual, eCommerce, creative, html" name="keywords">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="shortcut icon"/>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,300i,400,400i,700,700i" rel="stylesheet">
+
+
+    <!-- Stylesheets -->
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="css/flaticon.css" rel="stylesheet"/>
+    <link href="css/slicknav.min.css" rel="stylesheet"/>
+    <link href="css/jquery-ui.min.css" rel="stylesheet"/>
+    <link href="css/owl.carousel.min.css" rel="stylesheet"/>
+    <link href="css/animate.css" rel="stylesheet"/>
+    <link href="css/style.css" rel="stylesheet"/>
+    <link href="css/custom.css" rel="stylesheet"/>
+
+</head>
+<body>
+
+<!-- Header section -->
+<header class="header-section">
+    <div class="header-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 text-center text-lg-left">
+                    <!-- logo -->
+                    <a class="site-logo" href="./index.html">
+                        <h2>LOGO</h2>
+                    </a>
+                </div>
+                <div class="col-xl-4 col-lg-10 text-right">
+                    <div class="user-panel">
+                        <div class="up-item">
+                            <i class="flaticon-profile"></i>
+                            <a href="#">Login</a> ou <a href="#">Criar Conta</a>
+                        </div>
+                        <div class="up-item">
+                            <i class="flaticon-profile"></i>
+                            <a href="#">Minha Conta</a>
+                        </div>
+                        <div class="up-item ml-4">
+                            <i class="flaticon-profile"></i>
+                            <a href="#">Lista de Desejos</a>
+                        </div>
+                        <div class="up-item ml-4">
+                            <div class="shopping-card">
+                                <i class="flaticon-bag"></i>
+                                <span>0</span>
+                            </div>
+                            <a href="#">Carrinho</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="main-navbar">
+        <div class="container">
+            <!-- menu -->
+            <ul class="main-menu">
+                <li><a href="#">HOME</a></li>
+                <li><a href="#">PRODUTOS</a></li>
+                <li><a href="#">CARRINHO</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<!-- Header section end -->
+
+
+<!-- checkout section  -->
+<section class="checkout-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 order-2 order-lg-1">
+                <form class="checkout-form">
+                    <div class="cf-title">Endereço de Entrega</div>
+                    <div class="row">
+                        <div class="col-md-7">
+                            <p>*Billing Information</p>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="cf-radio-btns address-rb">
+                                <div class="cfr-item">
+                                    <input id="one" name="pm" type="radio">
+                                    <label for="one">Use meu endereço atual</label>
+                                </div>
+                                <div class="cfr-item">
+                                    <input id="two" name="pm" type="radio">
+                                    <label for="two">Use um endereço diferente</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row address-inputs">
+                        <div class="col-md-12">
+                            <input placeholder="Endereço, Logradouro, Número e Bairro" type="text">
+                            <input placeholder="Complemento (Opcional)" type="text">
+                        </div>
+                        <div class="col-md-6">
+                            <input placeholder="Cidade" type="text">
+                        </div>
+                        <div class="col-md-6">
+                            <input placeholder="Estado" type="text">
+                        </div>
+                        <div class="col-md-6">
+                            <input placeholder="CEP 00000-000" type="text">
+                        </div>
+                        <div class="col-md-6">
+                            <input placeholder="Telefone / Celular" type="text">
+                        </div>
+                    </div>
+                    <div class="cf-title">Delievery Info</div>
+                    <div class="row shipping-btns">
+                        <div class="col-6">
+                            <h4>Standard</h4>
+                        </div>
+                        <div class="col-6">
+                            <div class="cf-radio-btns">
+                                <div class="cfr-item">
+                                    <input id="ship-1" name="shipping" type="radio">
+                                    <label for="ship-1">Free</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <h4>Next day delievery </h4>
+                        </div>
+                        <div class="col-6">
+                            <div class="cf-radio-btns">
+                                <div class="cfr-item">
+                                    <input id="ship-2" name="shipping" type="radio">
+                                    <label for="ship-2">$3.45</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cf-title">Payment</div>
+                    <ul class="payment-list">
+                        <li>Paypal<a href="#"><img alt="" src="img/paypal.png"></a></li>
+                        <li>Credit / Debit card<a href="#"><img alt="" src="img/mastercart.png"></a></li>
+                        <li>Pay when you get the package</li>
+                    </ul>
+                    <button class="site-btn submit-order-btn">PAGAR</button>
+                </form>
+            </div>
+            <div class="col-lg-4 order-1 order-lg-2">
+                <div class="checkout-cart">
+                    <h3>Seus Produtos</h3>
+                    <ul class="product-list">
+                        <li>
+                            <div class="pl-thumb"><img alt="" src="img/cart/1.jpg"></div>
+                            <h6>Animal Print Dress</h6>
+                            <p>$45.90</p>
+                        </li>
+                        <li>
+                            <div class="pl-thumb"><img alt="" src="img/cart/2.jpg"></div>
+                            <h6>Animal Print Dress</h6>
+                            <p>$45.90</p>
+                        </li>
+                    </ul>
+                    <ul class="price-list">
+                        <li>Valor<span>R$99.90</span></li>
+                        <li>Frete<span>Grátis</span></li>
+                        <li class="total">Total do Pedido<span>$99.90</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- checkout section end -->
+
+<!-- Footer section -->
+<section class="footer-section">
+    <div class="container">
+        <div class="footer-logo text-center">
+            <a href="index.html"><h2 class="text-white">LOGO</h2></a>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-sm-6">
+                <div class="footer-widget about-widget">
+                    <h2>Sobre</h2>
+                    <p>Donec vitae purus nunc. Morbi faucibus erat sit amet congue mattis. Nullam frin-gilla faucibus
+                        urna, id dapibus erat iaculis ut. Integer ac sem.</p>
+                    <img alt="" src="img/cards.png">
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="footer-widget about-widget">
+                    <h2>Navegação</h2>
+                    <ul>
+                        <li><a href="">Minha Conta</a></li>
+                        <li><a href="">Meus Pedidos</a></li>
+                        <li><a href="">Lista de desejos</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="footer-widget about-widget">
+                    <h2>Categorias</h2>
+                    <ul>
+                        <li><a href="">Categoria 1</a></li>
+                        <li><a href="">Categoria 2</a></li>
+                        <li><a href="">Categoria 3</a></li>
+                        <li><a href="">Categoria 4</a></li>
+                        <li><a href="">Categoria 5</a></li>
+                        <li><a href="">Categoria 6</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="footer-widget contact-widget">
+                    <h2>Redes Sociais</h2>
+                    <div class="social-links">
+                        <a class="instagram" href=""><i class="fa fa-instagram"></i></a>
+                        <a class="facebook" href=""><i class="fa fa-facebook"></i></a>
+                        <a class="facebook" href="contato.html"><i class="fa fa-envelope-open"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="social-links-warp">
+        <div class="container">
+
+            <p class="text-white text-center mt-2">Feito por <a href="https://alexsanderfer.github.io/portfolio/"> Loja
+                Virtual</a> <i aria-hidden="true" class="fa fa-heart-o"></i></p>
+
+        </div>
+    </div>
+</section>
+<!-- Footer section end -->
+
+
+<!--====== Javascripts & Jquery ======-->
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.slicknav.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/jquery.nicescroll.min.js"></script>
+<script src="js/jquery.zoom.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>

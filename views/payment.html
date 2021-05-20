@@ -1,0 +1,33 @@
+<!-- cart section end -->
+<section class="cart-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="cart-table">
+                    <h3>Pagamento Nº: {$order.idorder}</h3>
+                    <div class="cart-table-warp">
+
+                        <iframe frameborder="0" name="boleto" src="/boleto/{$order.idorder}"
+                                style="width:100%; min-height:1000px; border:1px solid #CCC; padding:20px;"></iframe>
+
+                        <script>
+                            document.querySelector("#btn-print").addEventListener("click", function (event) {
+
+                                event.preventDefault();
+
+                                window.frames["boleto"].focus();
+                                window.frames["boleto"].print();
+
+                            });
+                        </script>
+
+                    </div>
+                    <div class="total-cost" id="botao-imprimir">
+                        <a class="site-btn" href="" id="btn-print" type="submit">IMPRIMIR</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- cart section end -->

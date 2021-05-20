@@ -1,19 +1,15 @@
 {
     "name": "alexsanderfer/ecommerce",
-    "description": "E-Commerce feito para estudos",
     "authors": [
         {
-            "name": "E-Commerce Treinamentos",
-            "email": "afgouveia90@gmail.com"
+          "name": "Alexsander Fernandes",
+          "email": "afgouveia90@hotmail.com"
         }
     ],
     "require": {
-    	"phpmailer/phpmailer": "v5.2.22",
-    	"slim/slim": "2.0.*",
-    	"rain/raintpl":"3.0.0",
-        "ext-pdo": "*",
-        "ext-json": "*",
-        "slim/psr7": "^1.4"
+      "phpmailer/phpmailer": "5.2.22",
+      "slim/slim": "2.0",
+      "rain/raintpl": "3.0.0"
     },
     "autoload": {
         "psr-4": {

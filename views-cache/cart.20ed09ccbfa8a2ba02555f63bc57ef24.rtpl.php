@@ -1,119 +1,102 @@
-<?php if(!class_exists('Rain\Tpl')){exit;}?><div class="product-big-title-area">
+<?php if (!class_exists('Rain\Tpl')) {
+    exit;
+} ?>    <!-- cart section end -->
+<section class="cart-section spad">
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                <div class="product-bit-title text-center">
-                    <h2>Carrinho de Compras</h2>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> <!-- End Page title area -->
+            <div class="col-lg-8">
+                <div class="cart-table">
+                    <h3>Seu Carrinho</h3>
+                    <div class="cart-table-warp">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th class="product-th">Produto</th>
+                                <th class="quy-th">Quantidade</th>
+                                <th class="total-th">Preço</th>
+                                <th class="total-th">Remover</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php $counter1 = -1;
+                            if (isset($products) && (is_array($products) || $products instanceof Traversable) && sizeof($products)) foreach ($products as $key1 => $value1) {
+                                $counter1++; ?>
 
-<div class="single-product-area">
-    <div class="zigzag-bottom"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="product-content-right">
-                    <div class="woocommerce">
-                        <div class="product-breadcroumb">
-                            <a href="/">Home</a>
-                            <a href="/cart">Carrinho</a>
-                        </div>
-                        <form action="/checkout">
-                            <div class="alert alert-danger" role="alert">
-                                Erro!
-                            </div>
-                            <table cellspacing="0" class="shop_table cart">
-                                <thead>
                                 <tr>
-                                    <th class="product-remove">&nbsp;</th>
-                                    <th class="product-thumbnail">&nbsp;</th>
-                                    <th class="product-name">Produto</th>
-                                    <th class="product-price">Preço</th>
-                                    <th class="product-quantity">Quantidade</th>
-                                    <th class="product-subtotal">Total</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr class="cart_item">
-                                    <td class="product-remove">
-                                        <a title="Remove this item" class="remove" href="#">×</a>
-                                    </td>
-
-                                    <td class="product-thumbnail">
-                                        <a href="#"><img width="145" height="145" alt="poster_1_up"
-                                                         class="shop_thumbnail" src="/res/site/img/product-thumb-2.jpg"></a>
-                                    </td>
-
-                                    <td class="product-name">
-                                        <a href="#">Nome do Produto</a>
-                                    </td>
-
-                                    <td class="product-price">
-                                        <span class="amount">$700.00</span>
-                                    </td>
-
-                                    <td class="product-quantity">
-                                        <div class="quantity buttons_added">
-                                            <input type="button" class="minus" value="-"
-                                                   onclick="window.location.href = '#'">
-                                            <input type="number" size="4" class="input-text qty text" title="Qty"
-                                                   value="1" min="0" step="1">
-                                            <input type="button" class="plus" value="+"
-                                                   onclick="window.location.href = '#'">
+                                    <td class="product-col">
+                                        <a href="/products/<?php echo htmlspecialchars($value1["desurl"], ENT_COMPAT, 'UTF-8', FALSE); ?>"><img
+                                                    src="<?php echo htmlspecialchars($value1["desphoto"], ENT_COMPAT, 'UTF-8', FALSE); ?>"
+                                                    alt=""></a>
+                                        <div class="pc-title">
+                                            <a href="/product/<?php echo htmlspecialchars($value1["desurl"], ENT_COMPAT, 'UTF-8', FALSE); ?>">
+                                                <h4><?php echo htmlspecialchars($value1["desproduct"], ENT_COMPAT, 'UTF-8', FALSE); ?></h4>
+                                            </a>
+                                            <p>R$<?php echo formatPrice($value1["vlprice"]); ?></p>
                                         </div>
                                     </td>
-                                    <td class="product-subtotal">
-                                        <span class="amount">$700.00</span>
+                                    <td class="quy-col">
+                                        <div class="quantity">
+                                            <div class="pro-qty">
+                                                <a href="/cart/<?php echo htmlspecialchars($value1["idproduct"], ENT_COMPAT, 'UTF-8', FALSE); ?>/add"><input
+                                                            type="text" name="qtd" value="1"></a>
+                                            </div>
+                                            <!-- <div class="dec pro-qty">-</div> -->
+                                        </div>
                                     </td>
+                                    <td class="total-col"><h4>R$<?php echo formatPrice($value1["vltotal"]); ?></h4></td>
+                                    <td class="total-col"><a
+                                                href="/cart/<?php echo htmlspecialchars($value1["idproduct"], ENT_COMPAT, 'UTF-8', FALSE); ?>/remove"><i
+                                                    class="flaticon-cancel-1"></i></a></td>
                                 </tr>
-                                </tbody>
-                            </table>
-                            <div class="cart-collaterals">
-                                <div class="cross-sells">
-                                    <h2>Cálculo de Frete</h2>
-                                    <div class="coupon">
-                                        <label for="cep">CEP:</label>
-                                        <input type="text" placeholder="00000-000" value="" id="cep" class="input-text"
-                                               name="zipcode">
-                                        <input type="submit" formmethod="post" formaction="/cart/freight"
-                                               value="CÁLCULAR" class="button">
-                                    </div>
-                                </div>
+                            <?php } ?>
 
-                                <div class="cart_totals ">
-                                    <h2>Resumo da Compra</h2>
-                                    <table cellspacing="0">
-                                        <tbody>
-                                        <tr class="cart-subtotal">
-                                            <th>Subtotal</th>
-                                            <td><span class="amount">$700.00</span></td>
-                                        </tr>
 
-                                        <tr class="shipping">
-                                            <th>Frete</th>
-                                            <td>$5.00 <small>prazo de 0 dia(s)</small></td>
-                                        </tr>
+                            </tbody>
 
-                                        <tr class="order-total">
-                                            <th>Total</th>
-                                            <td><strong><span class="amount">$705.00</span></strong></td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                        </table>
+                        <a href="" class="site-btn btn-total">TOTAL: R$ <?php echo formatPrice($cart["vltotal"]); ?></a>
 
-                            <div class="pull-right">
-                                <input type="submit" value="Finalizar Compra" name="proceed"
-                                       class="checkout-button button alt wc-forward">
-                            </div>
-                        </form>
                     </div>
+
                 </div>
+            </div>
+
+            <div class="col-lg-4 card-right" action="/checkout">
+
+                <?php if ($error != '') { ?>
+
+                    <div class="alert alert-danger" role="alert">
+                        <?php echo htmlspecialchars($error, ENT_COMPAT, 'UTF-8', FALSE); ?>
+
+                    </div>
+                <?php } ?>
+
+
+                <!--<form class="promo-code-form">
+                    <input type="text" placeholder="Cupom de desconto">
+                    <button>Aplicar</button>
+                </form>-->
+
+                <form class="promo-code-form">
+                    <input type="text" id="cep" placeholder="CEP 00000-000" name="zipcode"
+                           value="<?php echo htmlspecialchars($cart["deszipcode"], ENT_COMPAT, 'UTF-8', FALSE); ?>">
+                    <button type="submit" formmethod="post" formaction="/cart/freight" value="CALCULAR">Calcular
+                    </button>
+                </form>
+                <a href="" class="site-btn btn-frete">FRETE:
+                    R$ <?php echo formatPrice($cart["vlfreight"]); ?><?php if ($cart["nrdays"] > 0) { ?> <br> <small>
+                        prazo de <?php echo htmlspecialchars($cart["nrdays"], ENT_COMPAT, 'UTF-8', FALSE); ?>
+                        dia(s)</small><?php } ?></a>
+
+                &#10035; &#10035; &#10035; &#10035; &#10035; &#10035; &#10035; &#10035; &#10035; &#10035; &#10035;
+                &#10035; &#10035; &#10035; &#10035;
+                <br><br>
+
+                <a type="submit" href="/login" class="site-btn" name="proceed" value="Finalizar Compra">Finalizar
+                    compra</a>
+                <!--<a href="" class="site-btn sb-dark">Continuar comprando</a>-->
             </div>
         </div>
     </div>
-</div>
+</section>
+<!-- cart section end -->
