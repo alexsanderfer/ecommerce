@@ -1,6 +1,4 @@
-<?php if (!class_exists('Rain\Tpl')) {
-    exit;
-}?><!DOCTYPE html>
+<?php if(!class_exists('Rain\Tpl')){exit;}?><!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
@@ -13,18 +11,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
-    <link rel="stylesheet" href="/custom/admin/bootstrap/css/bootstrap.min.css">
+    <link href="/custom/admin/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="/custom/admin/dist/css/AdminLTE.min.css">
+    <link href="/custom/admin/dist/css/AdminLTE.min.css" rel="stylesheet">
     <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
           page. However, you can choose any other skin. Make sure you
           apply the skin class to the body tag so the changes take effect.
     -->
-    <link rel="stylesheet" href="/custom/admin/dist/css/skins/skin-blue.min.css">
+    <link href="/custom/admin/dist/css/skins/skin-blue.min.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -92,8 +90,8 @@ desired effect
                                         <a href="#">
                                             <div class="pull-left">
                                                 <!-- User Image -->
-                                                <img src="/custom/admin/dist/img/user2-160x160.jpg" class="img-circle"
-                                                     alt="User Image">
+                                                <img alt="User Image" class="img-circle"
+                                                     src="/custom/admin/dist/img/user2-160x160.jpg">
                                             </div>
                                             <!-- Message title and timestamp -->
                                             <h4>
@@ -158,9 +156,7 @@ desired effect
                                             <!-- The progress bar -->
                                             <div class="progress xs">
                                                 <!-- Change the css width attribute to simulate progress -->
-                                                <div class="progress-bar progress-bar-aqua" style="width: 20%"
-                                                     role="progressbar" aria-valuenow="20" aria-valuemin="0"
-                                                     aria-valuemax="100">
+                                                <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
                                                     <span class="sr-only">20% Complete</span>
                                                 </div>
                                             </div>
@@ -179,14 +175,14 @@ desired effect
                         <!-- Menu Toggle Button -->
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <!-- The user image in the navbar-->
-                            <img src="/custom/admin/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                            <img alt="User Image" class="user-image" src="/custom/admin/dist/img/user2-160x160.jpg">
                             <!-- hidden-xs hides the username on small devices so only the image appears. -->
                             <span class="hidden-xs">Alexsander Fernandes</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- The user image in the menu -->
                             <li class="user-header">
-                                <img src="/custom/admin/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                <img alt="User Image" class="img-circle" src="/custom/admin/dist/img/user2-160x160.jpg">
 
                                 <p>
                                     Alexsander Fernandes - Web Developer
@@ -236,7 +232,7 @@ desired effect
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="/custom/admin/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                    <img alt="User Image" class="img-circle" src="/custom/admin/dist/img/user2-160x160.jpg">
                 </div>
                 <div class="pull-left info">
                     <p>Alexsander Fernandes</p>

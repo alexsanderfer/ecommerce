@@ -1,6 +1,4 @@
-<?php if (!class_exists('Rain\Tpl')) {
-    exit;
-} ?><!-- Footer section -->
+<?php if(!class_exists('Rain\Tpl')){exit;}?><!-- Footer section -->
 <section class="footer-section">
     <div class="container">
         <div class="footer-logo text-center">
@@ -11,7 +9,7 @@
                 <div class="footer-widget about-widget">
                     <h2>Sobre</h2>
                     <p>Loja de venda de celulares feita para estudo pelo curso da Udemy da Hcode. Utilizado PHP 7.</p>
-                    <img src="../custom/site/img/cards.png" alt="">
+                    <img alt="" src="../custom/site/img/cards.png">
                 </div>
             </div>
 
@@ -19,7 +17,7 @@
                 <div class="footer-widget about-widget">
                     <h2>Categorias</h2>
                     <ul>
-                        <?php require $this->checkTemplate("categories-menu"); ?>
+                        <?php require $this->checkTemplate("categories-menu");?>
 
                     </ul>
                 </div>
@@ -28,9 +26,9 @@
                 <div class="footer-widget contact-widget">
                     <h2>Redes Sociais</h2>
                     <div class="social-links">
-                        <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
-                        <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
-                        <a href="contato.html" class="facebook"><i class="fa fa-envelope-open"></i></a>
+                        <a class="instagram" href="#"><i class="fa fa-instagram"></i></a>
+                        <a class="facebook" href="#"><i class="fa fa-facebook"></i></a>
+                        <a class="facebook" href="contato.html"><i class="fa fa-envelope-open"></i></a>
                     </div>
                 </div>
             </div>
@@ -48,7 +46,7 @@
         <div class="container">
 
             <p class="text-white text-center mt-2">Feito por <a href="https://alexsanderfer.github.io/portfolio/">
-                    Alexsander Fernandes</a> <i class="fa fa-heart-o" aria-hidden="true"></i></p>
+                Alexsander Fernandes</a> <i aria-hidden="true" class="fa fa-heart-o"></i></p>
 
         </div>
     </div>
