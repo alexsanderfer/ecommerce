@@ -32,7 +32,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '1af170a4d7b34e3722672884009c54505085d2da',
+    'reference' => '7d1d2cbe1033c2fdfbf8d28a06d4b78dc8d064f6',
     'name' => 'alexsanderfer/ecommerce',
   ),
   'versions' => 
@@ -44,7 +44,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '1af170a4d7b34e3722672884009c54505085d2da',
+      'reference' => '7d1d2cbe1033c2fdfbf8d28a06d4b78dc8d064f6',
     ),
     'phpmailer/phpmailer' => 
     array (
