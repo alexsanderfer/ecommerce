@@ -1,7 +1,7 @@
 <?php if(!class_exists('Rain\Tpl')){exit;}?><form method="post" action="https://pagseguro.uol.com.br/v2/checkout/payment.html">  
           
         <!-- Campos obrigatórios -->  
-        <input name="receiverEmail" type="hidden" value="marciasprates@hotmail.com">  
+        <input name="receiverEmail" type="hidden" value="alexfernandes90@outlook.pt">
         <input name="currency" type="hidden" value="BRL">  
         
         <?php $counter1=-1;  if( isset($products) && ( is_array($products) || $products instanceof Traversable ) && sizeof($products) ) foreach( $products as $key1 => $value1 ){ $counter1++; ?> 

@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-7 order-2 order-lg-1">
-                <form action="/checkout" class="checkout-form" method="post" name="checkout">
+                <form class="checkout-form" action="/checkout" method="post" name="checkout">
                     <div class="cf-title">Endereço de Entrega</div>
                     <div class="row address-inputs">
 
@@ -14,47 +14,64 @@
                         {/if}
 
                         <div class="col-md-12">
-                            <input id="billing_address_1" name="desaddress" placeholder="Endereço e Logradouro"
-                                   type="text" value="">
+                            <input type="text" placeholder="Endereço e Logradouro" value="{$address.desaddress}"
+                                   id="billing_address_1" name="desaddress">
 
-                            <input id="billing_district" name="desdistrict" placeholder="Bairro" type="text" value="">
+                            <input type="text" placeholder="Bairro" value="{$address.desdistrict}" id="billing_district"
+                                   name="desdistrict">
 
-                            <input class="input-text " id="billing_address_1" name="desnumber" placeholder="Número"
-                                   type="text" value="">
+                            <input type="text" value="" placeholder="Número" id="billing_address_1"
+                                   name="desnumber" class="input-text ">
 
-                            <input id="billing_address_2" name="descomplement" placeholder="Complemento (Opcional)"
-                                   type="text" value="{$address.descomplement}">
+                            <input type="text" placeholder="Complemento (Opcional)" value="{$address.descomplement}"
+                                   id="billing_address_2" name="descomplement">
                         </div>
                         <div class="col-md-6">
-                            <input id="billing_city" name="descity" placeholder="Cidade" type="text" value="">
+                            <input type="text" placeholder="Cidade" value="{$address.descity}" id="billing_city"
+                                   name="descity">
                         </div>
                         <div class="col-md-6">
-                            <input id="billing_state" name="desstate" placeholder="Estado" type="text"
+                            <input type="text" placeholder="Estado" id="billing_state" name="desstate"
                                    value="{$address.desstate}">
                         </div>
                         <div class="col-md-6">
-                            <input id="billing_cep_1" name="zipcode" placeholder="CEP 00000-000" type="text" value="">
+                            <input type="text" placeholder="CEP 00000-000" value="{$cart.deszipcode}" id="billing_cep_1"
+                                   name="zipcode">
                         </div>
                         <div class="col-md-6">
-                            <input id="billing_state" name="descountry" placeholder="País" type="text" value="">
+                            <input type="text" placeholder="País" id="billing_state" name="descountry"
+                                   value="{$address.descountry}">
                         </div>
                     </div>
                     <div class="cf-title">PAGAMENTO</div>
                     <ul class="payment-list">
 
-                        <li><input id="method-pagseguro" name="payment-method" type="radio" value="1"> <img alt=""
-                                                                                                            src="/custom/site/img/pagseguro.png">
-                            PagSeguro
+                        <!-- PayPal Logo -->
+                        <table border="0" cellpadding="10" cellspacing="0" align="center">
+                            <tbody>
+                            <tr>
+                                <td align="center"></td>
+                            </tr>
+                            <tr>
+                            </tr>
+                            </tbody>
+                        </table><!-- PayPal Logo -->
+
+                        <li><img src="/custom/site/img/pagseguro.png" alt="">PagSeguro -<span style="color: red">Indisponível</span>
                         </li>
 
-                        <li><input checked="checked" id="method-paypal" name="payment-method" type="radio" value="2">
-                            <img alt="" src="/custom/site/img/paypal.png"></a> Paypal
+                        <li><img src="/custom/site/img/cards.png" alt=""> -<span style="color: red">Indisponível</span>
+                        </li>
+
+                        <li><input type="radio" checked="checked" id="method-paypal" name="payment-method" value="2">
+                            <a href="" title="Pague com PayPal"><img src="https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-100px.png"
+                                 border="0" alt="PayPal Logo"/></a>
                         </li>
 
                         <li> >> Escolha o método de pagamento</li>
                     </ul>
-                    <button class="site-btn submit-order-btn" data-value="Place order" id="place_order"
-                            name="woocommerce_checkout_place_order" value="Continuar">CONTINUAR
+                    <button class="site-btn submit-order-btn" data-value="Place order" value="Continuar"
+                            id="place_order" name="woocommerce_checkout_place_order">CONTINUAR
                     </button>
                 </form>
             </div>
@@ -64,7 +81,7 @@
                     <ul class="product-list">
                         {loop="$products"}
                         <li>
-                            <div class="pl-thumb"><img alt="" src="{$value.desphoto}"></div>
+                            <div class="pl-thumb"><img src="{$value.desphoto}" alt=""></div>
                             <h6>{$value.desproduct}</h6>
                             <p>Qtd: {$value.nrqtd}</p>
                         </li>
@@ -72,7 +89,7 @@
                     {/loop}
                     <ul class="price-list">
                         <li>Subtotal<span>R$ {function="formatPrice($cart.vlsubtotal)"}</span></li>
-                        <li>Frete<span>R$ </span></li>
+                        <li>Frete<span>R$ {function="formatPrice($cart.vlfreight)"}</span></li>
                         <li class="total">Total do Pedido<span>R$ {function="formatPrice($cart.vltotal)"}</span></li>
                     </ul>
                 </div>

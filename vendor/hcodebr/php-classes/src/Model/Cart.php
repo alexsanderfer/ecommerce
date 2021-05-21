@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Hcode\Model;
 
@@ -7,7 +7,8 @@ use Hcode\Model;
 use Hcode\Mailer;
 use Hcode\Model\User;
 
-class Cart extends Model {
+class Cart extends Model
+{
 
     const SESSION = "Cart";
     const SESSION_ERROR = "CartError";
@@ -21,7 +22,7 @@ class Cart extends Model {
             $cart->getFromSessionID();
             if (!(int)$cart->getidcart() > 0) {
                 $data = [
-                    'dessessionid'=>session_id()
+                    'dessessionid' => session_id()
                 ];
                 if (User::checkLogin(false)) {
                     $user = User::getFromSession();
@@ -44,19 +45,19 @@ class Cart extends Model {
     {
         $sql = new Sql();
         $results = $sql->select("SELECT * FROM tb_carts WHERE dessessionid = :dessessionid", [
-            ':dessessionid'=>session_id()
+            ':dessessionid' => session_id()
         ]);
         if (count($results) > 0) {
             $this->setData($results[0]);
         }
 
-    }   
+    }
 
     public function get(int $idcart)
     {
         $sql = new Sql();
         $results = $sql->select("SELECT * FROM tb_carts WHERE idcart = :idcart", [
-            ':idcart'=>$idcart
+            ':idcart' => $idcart
         ]);
         if (count($results) > 0) {
             $this->setData($results[0]);
@@ -67,12 +68,12 @@ class Cart extends Model {
     {
         $sql = new Sql();
         $results = $sql->select("CALL sp_carts_save(:idcart, :dessessionid, :iduser, :deszipcode, :vlfreight, :nrdays)", [
-            ':idcart'=>$this->getidcart(),
-            ':dessessionid'=>$this->getdessessionid(),
-            ':iduser'=>$this->getiduser(),
-            ':deszipcode'=>$this->getdeszipcode(),
-            ':vlfreight'=>$this->getvlfreight(),
-            ':nrdays'=>$this->getnrdays()
+            ':idcart' => $this->getidcart(),
+            ':dessessionid' => $this->getdessessionid(),
+            ':iduser' => $this->getiduser(),
+            ':deszipcode' => $this->getdeszipcode(),
+            ':vlfreight' => $this->getvlfreight(),
+            ':nrdays' => $this->getnrdays()
         ]);
         $this->setData($results[0]);
     }
@@ -82,8 +83,8 @@ class Cart extends Model {
 
         $sql = new Sql();
         $sql->query("INSERT INTO tb_cartsproducts (idcart, idproduct) VALUES(:idcart, :idproduct)", [
-            ':idcart'=>$this->getidcart(),
-            ':idproduct'=>$product->getidproduct()
+            ':idcart' => $this->getidcart(),
+            ':idproduct' => $product->getidproduct()
         ]);
         $this->getCalculateTotal();
 
@@ -94,13 +95,13 @@ class Cart extends Model {
         $sql = new Sql();
         if ($all) {
             $sql->query("UPDATE tb_cartsproducts SET dtremoved = NOW() WHERE idcart = :idcart AND idproduct = :idproduct AND dtremoved IS NULL", [
-                ':idcart'=>$this->getidcart(),
-                ':idproduct'=>$product->getidproduct()
+                ':idcart' => $this->getidcart(),
+                ':idproduct' => $product->getidproduct()
             ]);
         } else {
             $sql->query("UPDATE tb_cartsproducts SET dtremoved = NOW() WHERE idcart = :idcart AND idproduct = :idproduct AND dtremoved IS NULL LIMIT 1", [
-                ':idcart'=>$this->getidcart(),
-                ':idproduct'=>$product->getidproduct()
+                ':idcart' => $this->getidcart(),
+                ':idproduct' => $product->getidproduct()
             ]);
 
         }
@@ -120,7 +121,7 @@ class Cart extends Model {
             GROUP BY b.idproduct, b.desproduct , b.vlprice, b.vlwidth, b.vlheight, b.vllength, b.vlweight, b.desurl 
             ORDER BY b.desproduct
         ", [
-            ':idcart'=>$this->getidcart()
+            ':idcart' => $this->getidcart()
         ]);
         return Product::checkList($rows);
     }
@@ -134,7 +135,7 @@ class Cart extends Model {
             INNER JOIN tb_cartsproducts b ON a.idproduct = b.idproduct
             WHERE b.idcart = :idcart AND dtremoved IS NULL;
         ", [
-            ':idcart'=>$this->getidcart()
+            ':idcart' => $this->getidcart()
         ]);
 
         if (count($results) > 0) {
@@ -152,22 +153,22 @@ class Cart extends Model {
             if ($totals['vlheight'] < 2) $totals['vlheight'] = 2;
             if ($totals['vllength'] < 16) $totals['vllength'] = 16;
             $qs = http_build_query([
-                'nCdEmpresa'=>'',
-                'sDsSenha'=>'',
+                'nCdEmpresa' => '',
+                'sDsSenha' => '',
                 'nCdServico'=>'40010',
-                'sCepOrigem'=>'09853120',
-                'sCepDestino'=>$nrzipcode,
-                'nVlPeso'=>$totals['vlweight'],
-                'nCdFormato'=>'1',
-                'nVlComprimento'=>$totals['vllength'],
-                'nVlAltura'=>$totals['vlheight'],
-                'nVlLargura'=>$totals['vlwidth'],
-                'nVlDiametro'=>'0',
-                'sCdMaoPropria'=>'S',
-                'nVlValorDeclarado'=>$totals['vlprice'],
-                'sCdAvisoRecebimento'=>'S'
+                'sCepOrigem' => '09853120',
+                'sCepDestino' => $nrzipcode,
+                'nVlPeso' => $totals['vlweight'],
+                'nCdFormato' => '1',
+                'nVlComprimento' => $totals['vllength'],
+                'nVlAltura' => $totals['vlheight'],
+                'nVlLargura' => $totals['vlwidth'],
+                'nVlDiametro' => '0',
+                'sCdMaoPropria' => 'S',
+                'nVlValorDeclarado' => $totals['vlprice'],
+                'sCdAvisoRecebimento' => 'S'
             ]);
-            $xml = simplexml_load_file("http://ws.correios.com.br/calculador/CalcPrecoPrazo.asmx/CalcPrecoPrazo?".$qs);
+            $xml = simplexml_load_file("http://ws.correios.com.br/calculador/CalcPrecoPrazo.asmx/CalcPrecoPrazo?" . $qs);
             $result = $xml->Servicos->cServico;
             if ($result->MsgErro != '') {
                 Cart::setMsgError($result->MsgErro);
@@ -184,7 +185,24 @@ class Cart extends Model {
         }
     }
 
-    public static function formatValueToDecimal($value):float
+    public function defineServico($servico)
+    {
+        $servico = strtolower($servico);
+        if ($servico == 'pac') {
+            $this->cod_servico = '41106';
+        } elseif ($servico == 'sedex') {
+            $this->cod_servico = '40010';
+        } elseif ($servico == 'sedex a cobrar') {
+            $this->cod_servico = '40045';
+        } elseif ($servico == 'sedex 10') {
+            $this->cod_servico = '40215';
+        } else {
+            return false;
+        }
+    }
+
+
+    public static function formatValueToDecimal($value): float
     {
         $value = str_replace('.', '', $value);
         return str_replace(',', '.', $value);

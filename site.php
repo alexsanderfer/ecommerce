@@ -101,9 +101,7 @@ $app->get("/checkout", function () {
     $address = new Address();
     $cart = Cart::getFromSession();
     if (!isset($_GET['zipcode'])) {
-
         $_GET['zipcode'] = $cart->getdeszipcode();
-
     }
     if (isset($_GET['zipcode'])) {
         $address->loadFromCEP($_GET['zipcode']);
@@ -112,7 +110,6 @@ $app->get("/checkout", function () {
         $cart->getCalculateTotal();
     }
     if (!$address->getdesaddress()) $address->setdesaddress('');
-    if (!$address->getdesnumber()) $address->setdesnumber('');
     if (!$address->getdescomplement()) $address->setdescomplement('');
     if (!$address->getdesdistrict()) $address->setdesdistrict('');
     if (!$address->getdescity()) $address->setdescity('');
@@ -177,54 +174,53 @@ $app->post("/checkout", function () {
         'vltotal' => $cart->getvltotal()
     ]);
     $order->save();
-    switch ((int)$_POST['payment-method']) {
-
-        case 1:
-            header("Location: ./order/" . $order->getidorder() . "/pagseguro");
-            break;
-
-        case 2:
-            header("Location: ./order/" . $order->getidorder() . "/paypal");
-            break;
-    }
+    header("Location: /order/" . $order->getidorder());
     exit;
 });
 
-$app->get("/order/:idorder/pagseguro", function ($idorder) {
+$app->get("/profile", function () {
     User::verifyLogin(false);
-    $order = new Order();
-    $order->get((int)$idorder);
-    $cart = $order->getCart();
-    $page = new Page([
-        'header' => false,
-        'footer' => false
-    ]);
-    $page->setTpl("payment-pagseguro", [
-        'order' => $order->getValues(),
-        'cart' => $cart->getValues(),
-        'products' => $cart->getProducts(),
-        'phone' => [
-            'areaCode' => substr($order->getnrphone(), 0, 2),
-            'number' => substr($order->getnrphone(), 2, strlen($order->getnrphone()))
-        ]
+    $user = User::getFromSession();
+    $page = new Page();
+    $page->setTpl("profile", [
+        'user' => $user->getValues(),
+        'profileMsg' => User::getSuccess(),
+        'profileError' => User::getError()
     ]);
 });
 
-$app->get("/order/:idorder/paypal", function ($idorder) {
+$app->post("/profile", function () {
     User::verifyLogin(false);
-    $order = new Order();
-    $order->get((int)$idorder);
-    $cart = $order->getCart();
-    $page = new Page([
-        'header' => false,
-        'footer' => false
-    ]);
-    $page->setTpl("payment-paypal", [
-        'order' => $order->getValues(),
-        'cart' => $cart->getValues(),
-        'products' => $cart->getProducts()
-    ]);
+    if (!isset($_POST['desperson']) || $_POST['desperson'] === '') {
+        User::setError("Preencha o seu nome.");
+        header('Location: /profile');
+        exit;
+    }
+    if (!isset($_POST['desemail']) || $_POST['desemail'] === '') {
+        User::setError("Preencha o seu e-mail.");
+        header('Location: /profile');
+        exit;
+    }
+
+    $user = User::getFromSession();
+    if ($_POST['desemail'] !== $user->getdesemail()) {
+        if (User::checkLoginExists($_POST['desemail']) === true) {
+            User::setError("Este endereço de e-mail já está cadastrado.");
+            header('Location: /profile');
+            exit;
+        }
+
+    }
+    $_POST['inadmin'] = $user->getinadmin();
+    $_POST['despassword'] = $user->getdespassword();
+    $_POST['deslogin'] = $_POST['desemail'];
+    $user->setData($_POST);
+    $user->save();
+    User::setSuccess("Dados alterados com sucesso!");
+    header('Location: /profile');
+    exit;
 });
+
 
 $app->get("/login", function () {
     $page = new Page();
@@ -243,6 +239,7 @@ $app->post("/login", function () {
     exit;
 });
 
+
 $app->get("/logout", function () {
     User::logout();
     header("Location: /login");
@@ -253,6 +250,12 @@ $app->post("/register", function () {
     $_SESSION['registerValues'] = $_POST;
     if (!isset($_POST['name']) || $_POST['name'] == '') {
         User::setErrorRegister("Preencha o seu nome.");
+        header("Location: /login");
+        exit;
+
+    }
+    if (!isset($_POST['login']) || $_POST['login'] == '') {
+        User::setErrorRegister("Preencha o seu login.");
         header("Location: /login");
         exit;
     }
@@ -315,7 +318,7 @@ $app->get("/forgot/reset", function () {
 
 $app->post("/forgot/reset", function () {
     $forgot = User::validForgotDecrypt($_POST["code"]);
-    User::setFogotUsed($forgot["idrecovery"]);
+    User::setForgotUsed($forgot["idrecovery"]);
     $user = new User();
     $user->get((int)$forgot["iduser"]);
     $password = User::getPasswordHash($_POST["password"]);
@@ -324,3 +327,105 @@ $app->post("/forgot/reset", function () {
     $page->setTpl("forgot-reset-success");
 });
 
+$app->get("/order/:idorder", function ($idorder) {
+    User::verifyLogin(false);
+    $order = new Order();
+    $order->get((int)$idorder);
+    $page = new Page();
+    $page->setTpl("payment", [
+        'order' => $order->getValues()
+    ]);
+});
+
+
+$app->get("/boleto/:idorder", function ($idorder) {
+
+    User::verifyLogin(false);
+
+    $order = new Order();
+
+    $order->get((int)$idorder);
+
+    // DADOS DO BOLETO PARA O SEU CLIENTE
+    $dias_de_prazo_para_pagamento = 10;
+    $taxa_boleto = 5.00;
+    $data_venc = date("d/m/Y", time() + ($dias_de_prazo_para_pagamento * 86400));  // Prazo de X dias OU informe data: "13/04/2006";
+
+    $valor_cobrado = formatPrice($order->getvltotal()); // Valor - REGRA: Sem pontos na milhar e tanto faz com "." ou "," ou com 1 ou 2 ou sem casa decimal
+    $valor_cobrado = str_replace(".", "", $valor_cobrado);
+    $valor_cobrado = str_replace(",", ".", $valor_cobrado);
+    $valor_boleto = number_format($valor_cobrado + $taxa_boleto, 2, ',', '');
+
+    $dadosboleto["nosso_numero"] = $order->getidorder();  // Nosso numero - REGRA: Máximo de 8 caracteres!
+    $dadosboleto["numero_documento"] = $order->getidorder();    // Num do pedido ou nosso numero
+    $dadosboleto["data_vencimento"] = $data_venc; // Data de Vencimento do Boleto - REGRA: Formato DD/MM/AAAA
+    $dadosboleto["data_documento"] = date("d/m/Y"); // Data de emissão do Boleto
+    $dadosboleto["data_processamento"] = date("d/m/Y"); // Data de processamento do boleto (opcional)
+    $dadosboleto["valor_boleto"] = $valor_boleto;    // Valor do Boleto - REGRA: Com vírgula e sempre com duas casas depois da virgula
+
+    // DADOS DO SEU CLIENTE
+    $dadosboleto["sacado"] = $order->getdesperson();
+    $dadosboleto["endereco1"] = $order->getdesaddress() . " " . $order->getdesdistrict();
+    $dadosboleto["endereco2"] = $order->getdescity() . " - " . $order->getdesstate() . " - " . $order->getdescountry() . " -  CEP: " . $order->getdeszipcode();
+
+    // INFORMACOES PARA O CLIENTE
+    $dadosboleto["demonstrativo1"] = "Pagamento de Compra na Loja Hcode E-commerce";
+    $dadosboleto["demonstrativo2"] = "Taxa bancária - R$ 0,00";
+    $dadosboleto["demonstrativo3"] = "";
+    $dadosboleto["instrucoes1"] = "- Sr. Caixa, cobrar multa de 2% após o vencimento";
+    $dadosboleto["instrucoes2"] = "- Receber até 10 dias após o vencimento";
+    $dadosboleto["instrucoes3"] = "- Em caso de dúvidas entre em contato conosco: suporte@hcode.com.br";
+    $dadosboleto["instrucoes4"] = "&nbsp; Emitido pelo sistema Projeto Loja Hcode E-commerce - www.hcode.com.br";
+
+    // DADOS OPCIONAIS DE ACORDO COM O BANCO OU CLIENTE
+    $dadosboleto["quantidade"] = "";
+    $dadosboleto["valor_unitario"] = "";
+    $dadosboleto["aceite"] = "";
+    $dadosboleto["especie"] = "R$";
+    $dadosboleto["especie_doc"] = "";
+
+
+    // ---------------------- DADOS FIXOS DE CONFIGURAÇÃO DO SEU BOLETO --------------- //
+
+
+    // DADOS DA SUA CONTA - ITAÚ
+    $dadosboleto["agencia"] = "1690"; // Num da agencia, sem digito
+    $dadosboleto["conta"] = "48781";    // Num da conta, sem digito
+    $dadosboleto["conta_dv"] = "2";    // Digito do Num da conta
+
+    // DADOS PERSONALIZADOS - ITAÚ
+    $dadosboleto["carteira"] = "175";  // Código da Carteira: pode ser 175, 174, 104, 109, 178, ou 157
+
+    // SEUS DADOS
+    $dadosboleto["identificacao"] = "Hcode Treinamentos";
+    $dadosboleto["cpf_cnpj"] = "24.700.731/0001-08";
+    $dadosboleto["endereco"] = "Rua Ademar Saraiva Leão, 234 - Alvarenga, 09853-120";
+    $dadosboleto["cidade_uf"] = "São Bernardo do Campo - SP";
+    $dadosboleto["cedente"] = "HCODE TREINAMENTOS LTDA - ME";
+
+    // NÃO ALTERAR!
+    $path = $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . "res" . DIRECTORY_SEPARATOR . "boletophp" . DIRECTORY_SEPARATOR . "include" . DIRECTORY_SEPARATOR;
+
+    require_once($path . "funcoes_itau.php");
+    require_once($path . "layout_itau.php");
+});
+
+$app->get("/profile/orders", function () {
+    User::verifyLogin(false);
+    $user = User::getFromSession();
+    $page = new Page();
+    $page->setTpl('profile-orders', [
+        'orders'
+    ]);
+});
+
+$app->get("/profile/orders/:idorder", function ($idorder) {
+    User::verifyLogin(false);
+    $order = new Order();
+    $order->get((int)$idorder);
+
+    $page = new Page();
+    $page->setTpl('profile-orders', [
+        'orders'=>$order->getValues()
+    ]);
+});

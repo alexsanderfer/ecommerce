@@ -68,6 +68,7 @@
                     <button formaction="/cart/freight" formmethod="post" type="submit" value="CALCULAR">Calcular
                     </button>
                 </form>
+
                 <a class="site-btn btn-frete" href="">FRETE: R$
                     {function="formatPrice($cart.vlfreight)"}{if="$cart.nrdays > 0"} <br> <small>prazo de {$cart.nrdays}
                         dia(s)</small>{/if}</a>
@@ -76,7 +77,7 @@
                 &#10035; &#10035; &#10035; &#10035;
                 <br><br>
 
-                <a class="site-btn" href="/login" name="proceed" type="submit" value="Finalizar Compra">Finalizar
+                <a class="site-btn" href="/checkout" name="proceed" type="submit" value="Finalizar Compra">Finalizar
                     compra</a>
                 <!--<a href="" class="site-btn sb-dark">Continuar comprando</a>-->
             </div>

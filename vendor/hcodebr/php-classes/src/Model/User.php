@@ -231,7 +231,7 @@ class User extends Model
         }
     }
 
-    public static function setFogotUsed($idrecovery)
+    public static function setForgotUsed($idrecovery)
     {
         $sql = new Sql();
         $sql->query("UPDATE tb_userspasswordsrecoveries SET dtrecovery = NOW() WHERE idrecovery = :idrecovery", array(
@@ -252,6 +252,7 @@ class User extends Model
     {
         $_SESSION[User::ERROR] = $msg;
     }
+
     public static function getError()
     {
         $msg = (isset($_SESSION[User::ERROR]) && $_SESSION[User::ERROR]) ? $_SESSION[User::ERROR] : '';

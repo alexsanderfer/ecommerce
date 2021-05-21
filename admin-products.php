@@ -5,12 +5,9 @@ use Hcode\Model\User;
 use Hcode\PageAdmin;
 
 $app->get("/admin/products", function () {
-
     User::verifyLogin();
-
     $search = (isset($_GET['search'])) ? $_GET['search'] : "";
     $page = (isset($_GET['page'])) ? (int)$_GET['page'] : 1;
-
     if ($search != '') {
 
         $pagination = Product::getPageSearch($search, $page);
@@ -88,19 +85,12 @@ $app->get("/admin/products/:idproduct", function ($idproduct) {
 });
 
 $app->post("/admin/products/:idproduct", function ($idproduct) {
-
     User::verifyLogin();
-
     $product = new Product();
-
     $product->get((int)$idproduct);
-
     $product->setData($_POST);
-
     $product->save();
-
-    $product->setPhoto($_FILES["file"]);
-
+    if ($_FILES["file"]["name"] != "") $product->setPhoto($_FILES["file"]);
     header("Location: /admin/products");
     exit;
 
@@ -121,4 +111,14 @@ $app->get("/admin/products/:idproduct/delete", function ($idproduct) {
 
 });
 
-?>
+$app->get("/admin/products/:idproduct", function($idproduct){
+    User::verifyLogin();
+    $product = new Product();
+    $product->get((int)$idproduct);
+    $product->getPhotos();
+    $page = new PageAdmin();
+    $page->setTpl("products-update", [
+        'product'=>$product->getValues(),
+        'products'=>$product->getPhotos()
+    ]);
+});

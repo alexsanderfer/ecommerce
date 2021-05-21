@@ -2,13 +2,13 @@
     <input type="hidden" name="cmd" value="_cart">
     <input type="hidden" name="upload" value="1">
     <INPUT TYPE="hidden" name="charset" value="utf-8">
-    <input type="hidden" name="business" value="fmarciasprates@hotmail.com">
+    <input type="hidden" name="business" value="alexfernandes90-facilitator@outlook.pt">
 
     {loop="$products"}
-    <input type="hidden" name="item_name_{$counter+1}" value="{$value.desproduct}">
-    <input type="hidden" name="item_number_{$counter+1}" value="{$value.idproduct}">
-    <input type="hidden" name="amount_{$counter+1}" value="{$value.vltotal}">
-    <input type="hidden" name="quantity_{$counter+1}" value="{$value.nrqtd}">
+    <input type="hidden" name="item_name_{$counter++}" value="{$value.desproduct}">
+    <input type="hidden" name="item_number_{$counter++}" value="{$value.idproduct}">
+    <input type="hidden" name="amount_{$counter++}" value="{$value.vltotal}">
+    <input type="hidden" name="quantity_{$counter++}" value="{$value.nrqtd}">
     {/loop}
 
     <input type="hidden" name="currency_code" value="BRL">  

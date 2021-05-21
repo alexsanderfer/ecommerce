@@ -11,24 +11,17 @@ class Product extends Model
 
     public static function listAll()
     {
-
         $sql = new Sql();
-
         return $sql->select("SELECT * FROM tb_products ORDER BY desproduct");
-
     }
 
     public static function checkList($list)
     {
-
         foreach ($list as &$row) {
-
             $p = new Product();
             $p->setData($row);
             $row = $p->getValues();
-
         }
-
         return $list;
 
     }
@@ -77,10 +70,10 @@ class Product extends Model
     public function checkPhoto()
     {
         if (file_exists($_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR .
-            "res" . DIRECTORY_SEPARATOR .
+            "custom" . DIRECTORY_SEPARATOR .
             "site" . DIRECTORY_SEPARATOR .
             "img" . DIRECTORY_SEPARATOR .
-            "products" . DIRECTORY_SEPARATOR .
+            "product" . DIRECTORY_SEPARATOR .
             $this->getidproduct() . ".jpg"
         )) {
             $url = "/custom/site/img/product/" . $this->getidproduct() . ".jpg";
@@ -127,11 +120,32 @@ class Product extends Model
             "custom" . DIRECTORY_SEPARATOR .
             "site" . DIRECTORY_SEPARATOR .
             "img" . DIRECTORY_SEPARATOR .
-            "products" . DIRECTORY_SEPARATOR .
+            "product" . DIRECTORY_SEPARATOR .
             $this->getidproduct() . ".jpg";
         imagejpeg($image, $dist);
         imagedestroy($image);
         $this->checkPhoto();
+    }
+
+
+    public function getPhotos()
+    {
+        $sql = new Sql();
+        //pesquisa para verificar se existem imagens no banco
+        $resultsExistPhoto = $sql->select("SELECT * FROM tb_productsphoto WHERE idproduct = :idproduct", [
+            ':idproduct' => $this->getidproduct()
+        ]);
+        $countResultsPhoto = count($resultsExistPhoto);
+        if ($countResultsPhoto > 0) {
+            foreach ($resultsExistPhoto as &$result) {
+                foreach ($result as $key => $value) {
+                    if ($key === "namephoto") {
+                        $result["desphoto"] = '/custom/site/img/product/' . $result['idproduct'] . "-" . $result['idphoto'] . '.jpg';
+                    }
+                }
+            }
+            return $resultsExistPhoto;
+        }
     }
 
     public function getFromURL($desurl)

@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-7 order-2 order-lg-1">
-                <form action="/checkout" class="checkout-form" method="post" name="checkout">
+                <form class="checkout-form" action="/checkout" method="post" name="checkout">
                     <div class="cf-title">Endereço de Entrega</div>
                     <div class="row address-inputs">
 
@@ -16,50 +16,65 @@
                         <?php } ?>
 
 
-
                         <div class="col-md-12">
-                            <input id="billing_address_1" name="desaddress" placeholder="Endereço e Logradouro"
-                                   type="text" value="<?php echo htmlspecialchars( $address["desaddress"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+                            <input type="text" placeholder="Endereço e Logradouro" value="<?php echo htmlspecialchars( $address["desaddress"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"
+                                   id="billing_address_1" name="desaddress">
 
-                            <input id="billing_district" name="desdistrict" placeholder="Bairro" type="text"
-                                   value="<?php echo htmlspecialchars( $address["desdistrict"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+                            <input type="text" placeholder="Bairro" value="<?php echo htmlspecialchars( $address["desdistrict"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" id="billing_district"
+                                   name="desdistrict">
 
-                            <input class="input-text " id="billing_address_1" name="desnumber" placeholder="Número"
-                                   type="text" value="<?php echo htmlspecialchars( $address["desnumber"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+                            <input type="text" value="" placeholder="Número" id="billing_address_1"
+                                   name="desnumber" class="input-text ">
 
-                            <input id="billing_address_2" name="descomplement" placeholder="Complemento (Opcional)"
-                                   type="text" value="<?php echo htmlspecialchars( $address["descomplement"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+                            <input type="text" placeholder="Complemento (Opcional)" value="<?php echo htmlspecialchars( $address["descomplement"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"
+                                   id="billing_address_2" name="descomplement">
                         </div>
                         <div class="col-md-6">
-                            <input id="billing_city" name="descity" placeholder="Cidade" type="text"
-                                   value="<?php echo htmlspecialchars( $address["descity"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+                            <input type="text" placeholder="Cidade" value="<?php echo htmlspecialchars( $address["descity"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" id="billing_city"
+                                   name="descity">
                         </div>
                         <div class="col-md-6">
-                            <input id="billing_state" name="desstate" placeholder="Estado" type="text"
+                            <input type="text" placeholder="Estado" id="billing_state" name="desstate"
                                    value="<?php echo htmlspecialchars( $address["desstate"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
                         </div>
                         <div class="col-md-6">
-                            <input id="billing_cep_1" name="zipcode" placeholder="CEP 00000-000" type="text"
-                                   value="<?php echo htmlspecialchars( $address["deszipcode"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+                            <input type="text" placeholder="CEP 00000-000" value="<?php echo htmlspecialchars( $cart["deszipcode"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" id="billing_cep_1"
+                                   name="zipcode">
                         </div>
                         <div class="col-md-6">
-                            <input id="billing_state" name="descountry" placeholder="País" type="text"
+                            <input type="text" placeholder="País" id="billing_state" name="descountry"
                                    value="<?php echo htmlspecialchars( $address["descountry"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
                         </div>
                     </div>
-
-                    <div class="alert alert-danger">
-                        Certifique-se de preencher todos os campos corretamente.
-                    </div>
-
-
                     <div class="cf-title">PAGAMENTO</div>
                     <ul class="payment-list">
 
+                        <!-- PayPal Logo -->
+                        <table border="0" cellpadding="10" cellspacing="0" align="center">
+                            <tbody>
+                            <tr>
+                                <td align="center"></td>
+                            </tr>
+                            <tr>
+                            </tr>
+                            </tbody>
+                        </table><!-- PayPal Logo -->
 
+                        <li><img src="/custom/site/img/pagseguro.png" alt="">PagSeguro -<span style="color: red">Indisponível</span>
+                        </li>
+
+                        <li><img src="/custom/site/img/cards.png" alt=""> -<span style="color: red">Indisponível</span>
+                        </li>
+
+                        <li><input type="radio" checked="checked" id="method-paypal" name="payment-method" value="2">
+                            <a href="" title="Pague com PayPal"><img src="https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-100px.png"
+                                 border="0" alt="PayPal Logo"/></a>
+                        </li>
+
+                        <li> >> Escolha o método de pagamento</li>
                     </ul>
-                    <button class="site-btn submit-order-btn" data-value="Place order" id="place_order"
-                            name="woocommerce_checkout_place_order" value="Continuar">CONTINUAR
+                    <button class="site-btn submit-order-btn" data-value="Place order" value="Continuar"
+                            id="place_order" name="woocommerce_checkout_place_order">CONTINUAR
                     </button>
                 </form>
             </div>
@@ -70,7 +85,7 @@
                         <?php $counter1=-1;  if( isset($products) && ( is_array($products) || $products instanceof Traversable ) && sizeof($products) ) foreach( $products as $key1 => $value1 ){ $counter1++; ?>
 
                         <li>
-                            <div class="pl-thumb"><img alt="" src="<?php echo htmlspecialchars( $value1["desphoto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"></div>
+                            <div class="pl-thumb"><img src="<?php echo htmlspecialchars( $value1["desphoto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" alt=""></div>
                             <h6><?php echo htmlspecialchars( $value1["desproduct"], ENT_COMPAT, 'UTF-8', FALSE ); ?></h6>
                             <p>Qtd: <?php echo htmlspecialchars( $value1["nrqtd"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
                         </li>
